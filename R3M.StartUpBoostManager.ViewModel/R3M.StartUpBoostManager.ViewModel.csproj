@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\R3M.StartUpBoostManager.Model\R3M.StartUpBoostManager.Model.csproj" />
+    <ProjectReference Include="..\R3M.StartUpBoostManager.Services\R3M.StartUpBoostManager.Services.csproj" />
+  </ItemGroup>
+
+</Project>
