@@ -14,7 +14,7 @@ jobs:
 
       - name: Use GitVersion
         id: gitversion
-        uses: gittools/actions/gitversion@v0.10.2
+        uses: gittools/actions/gitversion@v3.2.1
         with:
           useConfigFile: false
 
@@ -31,7 +31,7 @@ jobs:
       
       - name: Test
         run: dotnet test --no-build --configuration Debug --verbosity detailed
-        
+
       - name: Create Git tag with version
         if: github.event.pull_request.merged == true || github.ref == 'refs/heads/main'
         run: |
