@@ -6,16 +6,19 @@ namespace R3M.StartUpBoostManager.Services.StartupTask;
 
 public class StartupTaskScheduleService : IStartupTaskScheduleService
 {
+    private readonly ITaskSchedulerWrapper _taskSchedulerWrapper;
+
+    public StartupTaskScheduleService(ITaskSchedulerWrapper taskSchedulerWrapper)
+    {
+        _taskSchedulerWrapper = taskSchedulerWrapper;        
+    }
+
     public IEnumerable<StartupProgram> ListAllStartupPrograms()
     {
-        using var ts = new TaskService();
-
         List<StartupProgram> startupPrograms = [];
-        foreach (var task in ts.AllTasks)
+        foreach (var task in _taskSchedulerWrapper.AllTasks)
         {
-            if (task.Definition.Triggers.Any(t =>
-                t.TriggerType == TaskTriggerType.Logon ||
-                t.TriggerType == TaskTriggerType.Boot))
+            if (_taskSchedulerWrapper.HasStartupTrigger(task))            
             {
                 startupPrograms.Add(new StartupProgram
                 {
