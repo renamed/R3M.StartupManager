@@ -24,8 +24,4 @@
     <PackageReference Include="TaskScheduler" Version="2.12.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
-
 </Project>
