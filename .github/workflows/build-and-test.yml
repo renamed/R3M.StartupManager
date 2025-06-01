@@ -11,14 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Use GitVersion
-        id: gitversion
-        uses: gittools/actions/gitversion/setup@v3.2.1
-        with:
-          versionSpec: '6.3.x'
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -33,11 +25,3 @@ jobs:
       
       - name: Test
         run: dotnet test --no-build --configuration Debug --verbosity detailed
-        
-      - name: Create Git tag with version
-        if: github.event.pull_request.merged == true || github.ref == 'refs/heads/main'
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git tag v${{ steps.gitversion.outputs.semVer }}
-          git push origin v${{ steps.gitversion.outputs.semVer }}
